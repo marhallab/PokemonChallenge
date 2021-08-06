@@ -1,24 +1,35 @@
 <template>
   <div class="navPages">
-    <div v-for="pok of allPokemons" :key="pok.pokeName">
-      <pokemonCard
-        :pokeName="pok.pokeName"
-        :pokeHeight="pok.pokeHeight"
-        :pokeWeight="pok.pokeWeight"
-        :imageUrl="pok.imageUrl"
-      />
+    <b-pagination
+      v-model="currentPage"
+      :total-rows="rows"
+      :per-page="pokemonsPerPage"
+      aria-controls="pokList"
+      align="center"
+    ></b-pagination>
+
+    <div class="pokemons-container">
+      <div id="pokList" v-for="pok of listsPokemons" :key="pok.pokeName">
+        <pokemonCard
+          :pokeName="pok.pokeName"
+          :pokeHeight="pok.pokeHeight"
+          :pokeWeight="pok.pokeWeight"
+          :imageUrl="pok.imageUrl"
+        />
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped>
-.navPages {
+
+.pokemons-container{
   display: flex;
   flex-flow: row wrap;
   justify-content: space-evenly;
 }
 
-.navPages div {
+.pokemons-container div {
   width: 200px;
   height: 400px;
 }
@@ -35,10 +46,23 @@ export default {
     return {
       allPokemonsUrls: [],
       allPokemons: [],
+      currentPage: 1,
+      pokemonsPerPage: 30,
     };
   },
   components: {
     pokemonCard,
+  },
+  computed: {
+    rows() {
+      return this.allPokemons.length;
+    },
+    listsPokemons() {
+      return this.allPokemons.slice(
+        (this.currentPage - 1) * this.pokemonsPerPage,
+        this.currentPage * this.pokemonsPerPage
+      );
+    },
   },
   methods: {
     setAllPokemonsUrls() {
@@ -56,7 +80,6 @@ export default {
     },
 
     setAllPokemons() {
-      console.log("HERE 2");
       this.allPokemonsUrls.forEach((pokemonUrl) => {
         axios
           .request(pokemonUrl)
