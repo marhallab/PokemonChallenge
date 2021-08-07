@@ -22,16 +22,10 @@
 </template>
 
 <style scoped>
-
-.pokemons-container{
+.pokemons-container {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-evenly;
-}
-
-.pokemons-container div {
-  width: 200px;
-  height: 400px;
 }
 </style>
 
