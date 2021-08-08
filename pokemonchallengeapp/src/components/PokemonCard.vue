@@ -6,8 +6,8 @@
       img-alt="Image"
       style="max-width: 20rem"
     >
-      <b-card-text> <b>Weight:</b> {{ pokeWeight/10 }} kg.</b-card-text>
-      <b-card-text> <b>Height:</b> {{ pokeHeight/10 }} m.</b-card-text>
+      <b-card-text> <b>Weight:</b> {{ pokeWeight/10 }} kg</b-card-text>
+      <b-card-text> <b>Height:</b> {{ pokeHeight/10 }} m</b-card-text>
     </b-card>
   </div>
 </template>
@@ -28,6 +28,5 @@ export default {
     pokeHeight: Number,
     imageUrl: String,
   },
-  components: {},
 };
 </script>
