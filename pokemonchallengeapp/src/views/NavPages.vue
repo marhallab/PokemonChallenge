@@ -1,5 +1,9 @@
 <template>
   <div class="navPages">
+    <h1><b>This is the navigation with the pagination</b></h1>
+    <br>
+    <h3>30 pokemons per page.</h3>
+    <br>
     <b-pagination
       v-model="currentPage"
       :total-rows="rows"
@@ -49,6 +53,7 @@ export default {
     rows() {
       return this.allPokemons.length;
     },
+    // return the next 30 pokemons every slice per page  
     listsPokemons() {
       return this.allPokemons.slice(
         (this.currentPage - 1) * this.pokemonsPerPage,
