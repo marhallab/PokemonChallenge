@@ -11,16 +11,4 @@ export default class Pokemon {
     this.pokeWeight = pWeight;
     this.imageUrl = url;
   }
-  getName() {
-    return this.pokeName;
-  }
-  getHeight() {
-    return this.pokeHeight;
-  }
-  getWeight() {
-    return this.pokeWeight;
-  }
-  getImageUrl() {
-    return this.imageUrl;
-  }
 }
