@@ -1,8 +1,9 @@
 <template>
   <div class="navButton">
 
-    <h1> Please click on the button "show more" at the bottom of the page to add more pokemons</h1>
+    <h1> Please click on the button "show more" at the BOTTOM of the page to add more pokemons.</h1>
     <br>
+    <p><b>If the button doesn't show, that means that you have reach the limit of the pokemons available (150 pokemons max).</b></p>
     <div class="pokemons-container">
       <div
         v-for="pok in allPokemons.slice(0, this.currentNumberDisplay)"
