@@ -31,14 +31,12 @@
 
 <script>
 import pokemonCard from "../components/PokemonCard.vue";
-import axios from "axios";
-import pokemon from "../components/Pokemon";
+import getRequestPokemons from "../components/GetRequestsPokemons";
 
 export default {
   name: "navPages",
   data: function () {
     return {
-      allPokemonsUrls: [],
       allPokemons: [],
       currentPage: 1,
       pokemonsPerPage: 30,
@@ -59,43 +57,13 @@ export default {
     },
   },
   methods: {
-    setAllPokemonsUrls() {
-      axios
-        .request("https://pokeapi.co/api/v2/pokemon/?limit=150")
-        .then((response) => {
-          response.data.results.forEach((pokemonUrl) => {
-            this.allPokemonsUrls.push(pokemonUrl.url);
-          });
-          this.setAllPokemons();
-        })
-        .catch((error) => {
-          console.log(error.response);
-        });
-    },
-
-    setAllPokemons() {
-      this.allPokemonsUrls.forEach((pokemonUrl) => {
-        axios
-          .request(pokemonUrl)
-          .then((response) => {
-            var pok = new pokemon(
-              response.data.name,
-              response.data.height,
-              response.data.weight,
-              response.data.sprites.front_default
-            );
-
-            this.allPokemons.push(pok);
-          })
-          .catch((error) => {
-            console.log(error.response);
-          });
-      });
+    getListPokemon() {
+      this.allPokemons = getRequestPokemons.getListPokemons();
     },
   },
 
   created: function () {
-    this.setAllPokemonsUrls();
+    this.getListPokemon();
   },
 };
 </script>
