@@ -1,14 +1,18 @@
 <template>
   <div class="navButton">
-
-    <h1> Please click on the button "show more" at the BOTTOM of the page to add more pokemons.</h1>
-    <br>
-    <p><b>If the button doesn't show, that means that you have reach the limit of the pokemons available (150 pokemons max).</b></p>
+    <h1><b>This is the navigation with the button</b></h1>
+    <br />
+    <h2>
+      Please click on the button "show more" at the BOTTOM of the page to add
+      more pokemons.
+    </h2>
+    <br />
+    <p>
+      <b>If the button doesn't show, that means that you have reach the limit of
+        the pokemons available (150 pokemons max).</b>
+    </p>
     <div class="pokemons-container">
-      <div
-        v-for="pok in allPokemons.slice(0, this.currentNumberDisplay)"
-        :key="pok.pokeName"
-      >
+      <div v-for="pok in listsPokemons" :key="pok.pokeName">
         <pokemonCard
           :pokeName="pok.pokeName"
           :pokeHeight="pok.pokeHeight"
@@ -17,16 +21,19 @@
         />
       </div>
     </div>
-    <h2> Current number of pokemons displayed: {{currentNumberDisplay}}</h2>
-    <br>
-    <b-button v-show="btnIsOn" v-on:click="updateListPokemons">Show More</b-button>
+    <h2>
+      Current number of pokemons displayed: {{ currentNumberDisplay }} pokemons.
+    </h2>
+    <br />
+    <b-button v-show="btnIsOn" v-on:click="updateListPokemons"
+      >Show More</b-button
+    >
   </div>
 </template>
 
 <style scoped>
-
 .navButton {
-  margin-bottom: 10% ;
+  margin-bottom: 10%;
 }
 .pokemons-container {
   display: flex;
@@ -49,6 +56,7 @@ export default {
       currentNumberDisplay: 50,
     };
   },
+
   components: {
     pokemonCard,
   },
@@ -56,26 +64,12 @@ export default {
   methods: {
     getListPokemon() {
       this.allPokemons = getRequestPokemons.getListPokemons();
-      //this.firstLoad();
     },
 
-    firstLoad() {
-      /* for (var i = 0; i < 50; i++) {
-        console.log(this.allPokemons);
-        console.log(this.allPokemons.pop());
-        this.allPokemonsDisplay.push(this.allPokemons.pop());
-      }*/
-
-      this.allPokemonsDisplay = this.allPokemons.slice(
-        (0, this.currentNumberDisplay)
-      );
-    },
-
+    // this methos is called when the button is clicked to add 15 more pokemons and to disable the button
+    // when all pokemons in the list are displayed
     updateListPokemons() {
-      var lengthListDisplay = this.allPokemons.slice(
-        0,
-        this.currentNumberDisplay
-      ).length;
+      var lengthListDisplay = this.allPokemons.slice(0, this.currentNumberDisplay).length;
       var lengthList = this.allPokemons.length;
 
       if (lengthListDisplay != 150) {
@@ -84,12 +78,17 @@ export default {
         } else if (lengthList - lengthListDisplay < 14) {
           this.currentNumberDisplay =
             this.currentNumberDisplay + (lengthList - lengthListDisplay);
-            this.btnIsOn = false;
+          this.btnIsOn = false;
         }
-      } 
+      }
     },
   },
 
+  computed: {
+    listsPokemons() {
+      return this.allPokemons.slice(0, this.currentNumberDisplay);
+    },
+  },
   created: function () {
     this.getListPokemon();
   },
