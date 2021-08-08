@@ -12,8 +12,7 @@ export default {
             .request("https://pokeapi.co/api/v2/pokemon/?limit=150")
             .then((response) => {
                 response.data.results.forEach((pokemonUrl) => {
-                    allPokemonsUrls.push(pokemonUrl.url);
-                    console.log(this.allPokemonsUrls);
+                    allPokemonsUrls.push(pokemonUrl.url);         
                 });
                 this.getPokemonsFromUrl();
             })

@@ -57,13 +57,13 @@ export default {
     },
   },
   methods: {
-    getListPokemon() {
+    getListPokemons() {
       this.allPokemons = getRequestPokemons.getListPokemons();
     },
   },
 
   created: function () {
-    this.getListPokemon();
+    this.getListPokemons();
   },
 };
 </script>
